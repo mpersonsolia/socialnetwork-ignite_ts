@@ -1,34 +1,88 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import styles from './App.module.css';
+import { Header } from './components/Header';
+import { Post } from './components/Post';
+import { Sidebar } from './components/Sidebar';
+import './global.css';
+
+//posts para simular o back end
+const posts = [
+	{
+		id: 1,
+		author: {
+			avatarUrl: 'https://github.com/mpersonsolia.png',
+			name: 'Maria Paula',
+			role: 'Web Developer @ Allìms',
+		},
+		content: [
+			{ type: 'paragraph', content: 'Fala galera 👋' },
+			{
+				type: 'paragraph',
+				content:
+					'Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
+			},
+			{ type: 'link', content: 'jane.design/doctorcare' },
+		],
+		publishedAt: new Date('2022-07-03 02:58:12'),
+	},
+	{
+		id: 2,
+		author: {
+			avatarUrl: 'https://github.com/Rocketseat.png',
+			name: 'Rocketseat',
+			role: 'CEO @ Rocketseat',
+		},
+		content: [
+			{ type: 'paragraph', content: 'Fala galera 👋' },
+			{
+				type: 'paragraph',
+				content:
+					'Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
+			},
+			{ type: 'link', content: 'jane.design/doctorcare' },
+		],
+		publishedAt: new Date('2022-08-01 02:08:10'),
+	},
+	{
+		id: 3,
+		author: {
+			avatarUrl: 'https://github.com/developerAllims.png',
+			name: 'Allìms',
+			role: 'CEO @ Allìms',
+		},
+		content: [
+			{ type: 'paragraph', content: 'Fala galera 👋' },
+			{
+				type: 'paragraph',
+				content:
+					'Acabei de subir mais um projeto no meu portifólio. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
+			},
+			{ type: 'link', content: 'jane.design/doctorcare' },
+		],
+		publishedAt: new Date('2022-08-03 20:58:12'),
+	},
+];
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+	return (
+		<div>
+			<Header />
+			<div className={styles.wrapper}>
+				<Sidebar />
+				<main>
+					{posts.map((post) => {
+						return (
+							<Post
+								author={post.author}
+								content={post.content}
+								publishedAt={post.publishedAt}
+								key={post.id}
+							/>
+						);
+					})}
+				</main>
+			</div>
+		</div>
+	);
 }
 
-export default App
+export default App;
